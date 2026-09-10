@@ -7,7 +7,7 @@ const OPTIONS = [
     ...QUIZ_LENGTHS.quick,
     emoji: "⚡",
     tagline: "The fast read",
-    description: "Ten questions, about two minutes. Great if you just want a match.",
+    description: "The fast set, about two minutes. Great if you just want a match.",
     tilt: "-rotate-1",
   },
   {
@@ -15,7 +15,7 @@ const OPTIONS = [
     emoji: "🔍",
     tagline: "The sharp read",
     description:
-      "Fifteen questions. Adds tie-breakers to separate close departments more precisely.",
+      "The full set. Adds tie-breakers to separate close departments more precisely.",
     tilt: "rotate-1",
   },
 ];

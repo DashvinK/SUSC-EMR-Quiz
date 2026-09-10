@@ -27,3 +27,6 @@ Thumbs.db
 build-plan.md 
 keys/
 
+
+# Raw source images (originals). The optimized web copies live in public/assets/.
+resources/

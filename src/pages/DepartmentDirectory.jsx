@@ -10,7 +10,7 @@ export default function DepartmentDirectory() {
       <header className="mb-10 text-center">
         <span className="sticker -rotate-2">The whole crew</span>
         <h1 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
-          The eight departments 🏛️
+          The seven departments 🏛️
         </h1>
         <p className="mx-auto mt-2 max-w-lg font-medium text-navy/70">
           Every part of SUSC that keeps the council running. Not sure where you

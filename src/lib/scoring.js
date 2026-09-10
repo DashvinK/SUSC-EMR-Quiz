@@ -2,7 +2,7 @@ import { departments } from "../data/departments.js";
 
 const ALL_SLUGS = departments.map((d) => d.slug);
 
-// Build a fresh { slug: 0 } map for all 8 departments.
+// Build a fresh { slug: 0 } map for all departments.
 function emptyScores() {
   return ALL_SLUGS.reduce((acc, slug) => {
     acc[slug] = 0;

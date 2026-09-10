@@ -52,8 +52,8 @@ export default function DepartmentPage() {
         <aside className="flex flex-col gap-3 lg:order-2 lg:sticky lg:top-28">
           <div className="card p-5">
             <h2 className="text-lg font-bold text-navy">Interested? 🙌</h2>
-            <p className="mt-1 text-sm font-medium text-navy/70">
-              Take the next step or see if it's your match.
+            <p className="mt-1 text-sm font-medium leading-relaxed text-navy/70">
+              {department.closing || "Take the next step or see if it's your match."}
             </p>
             <div className="mt-4 flex flex-col gap-3">
               {department.applyLink ? (
@@ -85,6 +85,52 @@ export default function DepartmentPage() {
               {department.longDescription}
             </p>
           </section>
+
+          {/* Events / initiatives / teams */}
+          {department.events?.length ? (
+            <section>
+              <h2 className="mb-4 text-xl font-bold text-navy">
+                {department.eventsTitle || "Events & Initiatives"} ✨
+              </h2>
+              <div className="flex flex-col gap-4">
+                {department.events.map((event, i) => (
+                  <div
+                    key={event.title}
+                    className={`card p-5 ${i % 2 ? "-rotate-[0.5deg]" : "rotate-[0.5deg]"}`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className="grid h-8 w-8 flex-shrink-0 -rotate-3 place-items-center rounded-xl border-2 border-navy bg-blue text-sm font-bold text-white shadow-hard-sm">
+                        {i + 1}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-bold leading-tight text-navy">
+                          {event.title}
+                        </h3>
+                        {event.tagline ? (
+                          <p className="mt-1 text-sm font-semibold text-blue-dark">
+                            {event.tagline}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                    {event.points?.length ? (
+                      <ul className="mt-3 flex flex-col gap-1.5 pl-11">
+                        {event.points.map((point, j) => (
+                          <li
+                            key={j}
+                            className="flex gap-2 text-[15px] font-medium leading-snug text-navy/80"
+                          >
+                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-navy/50" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* Past-event photos (§11: 2–3 per department pending). */}
           <section>

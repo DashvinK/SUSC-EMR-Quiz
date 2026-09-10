@@ -25,7 +25,7 @@ export default function Landing() {
             </h1>
             <p className="mx-auto mt-4 max-w-md text-base font-medium text-white/90 lg:mx-0 lg:text-lg">
               Answer a few honest questions and we'll match you to your top 2 of
-              eight departments. Takes about two minutes. 🕑
+              seven departments. Takes about two minutes. 🕑
             </p>
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
               <Link
@@ -102,7 +102,7 @@ export default function Landing() {
       {/* Department teaser */}
       <section>
         <div className="mb-4 flex items-baseline justify-between">
-          <h2 className="text-2xl font-bold text-navy">Eight departments 🏛️</h2>
+          <h2 className="text-2xl font-bold text-navy">Seven departments 🏛️</h2>
           <Link
             to="/departments"
             className="text-sm font-bold text-blue-dark hover:underline"

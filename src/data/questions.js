@@ -1,9 +1,9 @@
 // Quiz questions. Option `weights` keys MUST match department slugs in src/data/departments.js:
 // secretarial, treasury, academic-affairs, external-relations, extracurricular,
-// public-relations, student-relations, international-student-relations
+// public-relations, student-relations
 //
 // Quick mode  = coreQuestions (10).
-// Thorough mode = coreQuestions.concat(extendedQuestions) (15).
+// Thorough mode = coreQuestions.concat(extendedQuestions) (14).
 
 // Quick set — Questions 1–10 (used in both Quick and Thorough).
 export const coreQuestions = [
@@ -24,7 +24,7 @@ export const coreQuestions = [
     options: [
       { text: "A perfectly reconciled expense sheet", weights: { treasury: 3 } },
       { text: "A caption that gets shared everywhere", weights: { "public-relations": 3 } },
-      { text: "A student complaint that finally got resolved", weights: { "academic-affairs": 2, "student-relations": 2, "international-student-relations": 1 } },
+      { text: "A student complaint that finally got resolved", weights: { "academic-affairs": 2, "student-relations": 2 } },
       { text: "A signed sponsorship deal", weights: { "external-relations": 3 } },
     ],
   },
@@ -35,7 +35,7 @@ export const coreQuestions = [
       { text: "Quietly take notes so nothing gets lost", weights: { secretarial: 3 } },
       { text: "Redirect it back to the actual agenda", weights: { "academic-affairs": 2, treasury: 1 } },
       { text: "Crack a joke to lighten the room", weights: { extracurricular: 2, "public-relations": 1 } },
-      { text: "Wait, then follow up 1-on-1 with the key person after", weights: { "student-relations": 2, "international-student-relations": 1 } },
+      { text: "Wait, then follow up 1-on-1 with the key person after", weights: { "student-relations": 2 } },
     ],
   },
   {
@@ -45,17 +45,17 @@ export const coreQuestions = [
     options: [
       { text: '"I notice when something\'s off before anyone else does"', weights: { treasury: 2, "academic-affairs": 1 } },
       { text: '"I can talk to literally anyone"', weights: { "external-relations": 2, "public-relations": 1 } },
-      { text: '"People tell me things they wouldn\'t tell others"', weights: { "student-relations": 2, "international-student-relations": 1 } },
+      { text: '"People tell me things they wouldn\'t tell others"', weights: { "student-relations": 2 } },
       { text: '"I keep things running even when no one\'s watching"', weights: { secretarial: 2, extracurricular: 1 } },
     ],
   },
   {
     id: "q5",
-    prompt: "An international student comes to you confused about a policy. You...",
+    prompt: "A student comes to you confused about a campus policy. You...",
     options: [
-      { text: "Walk them through it patiently, step by step", weights: { "international-student-relations": 3 } },
+      { text: "Walk them through it patiently, step by step", weights: { "student-relations": 3 } },
       { text: "Escalate it to whoever can actually fix the policy", weights: { "academic-affairs": 3 } },
-      { text: "Make a note to raise it in the next feedback session", weights: { "student-relations": 3 } },
+      { text: "Make a note to raise it in the next feedback session", weights: { "academic-affairs": 2, "student-relations": 1 } },
       { text: "Point them to the right department calmly", weights: { secretarial: 2 } },
     ],
   },
@@ -66,7 +66,7 @@ export const coreQuestions = [
       { text: "Messy, disorganized paperwork", weights: { secretarial: 2, treasury: 2 } },
       { text: "A partnership opportunity nobody followed up on", weights: { "external-relations": 3 } },
       { text: "A caption/post that goes out with typos", weights: { "public-relations": 3 } },
-      { text: "A student issue nobody's tracking", weights: { "academic-affairs": 1, "student-relations": 1, "international-student-relations": 1 } },
+      { text: "A student issue nobody's tracking", weights: { "academic-affairs": 1, "student-relations": 1 } },
     ],
   },
   {
@@ -76,7 +76,7 @@ export const coreQuestions = [
       { text: "Closing out a stack of admin tasks", weights: { secretarial: 3 } },
       { text: "Landing a new sponsor", weights: { "external-relations": 3 } },
       { text: "Making something visually excellent", weights: { "public-relations": 3 } },
-      { text: "Actually helping someone with a real problem", weights: { "student-relations": 2, "international-student-relations": 2 } },
+      { text: "Actually helping someone with a real problem", weights: { "student-relations": 3 } },
     ],
   },
   {
@@ -93,7 +93,7 @@ export const coreQuestions = [
     prompt: "Forced choice: would you rather...",
     options: [
       { text: "Manage money carefully", weights: { treasury: 3 } },
-      { text: "Manage people's feelings carefully", weights: { "student-relations": 2, "international-student-relations": 1 } },
+      { text: "Manage people's feelings carefully", weights: { "student-relations": 3 } },
     ],
   },
   {
@@ -106,7 +106,7 @@ export const coreQuestions = [
   },
 ];
 
-// Thorough-only additions — Questions 11–15 (differentiate close pairs).
+// Thorough-only additions — Questions 11–14 (differentiate close pairs).
 export const extendedQuestions = [
   {
     id: "q11",
@@ -128,20 +128,12 @@ export const extendedQuestions = [
     id: "q13",
     prompt: "Forced choice: would you rather...",
     options: [
-      { text: "Handle a general student welfare concern", weights: { "student-relations": 3 } },
-      { text: "Handle a concern specific to international students navigating a new system", weights: { "international-student-relations": 3 } },
-    ],
-  },
-  {
-    id: "q14",
-    prompt: "Forced choice: would you rather...",
-    options: [
       { text: "Keep the books balanced down to the ringgit", weights: { treasury: 3 } },
       { text: "Keep every meeting's minutes and admin airtight", weights: { secretarial: 3 } },
     ],
   },
   {
-    id: "q15",
+    id: "q14",
     prompt: "Forced choice: would you rather...",
     options: [
       { text: "Be the one clubs call when they need something sorted", weights: { extracurricular: 3 } },
