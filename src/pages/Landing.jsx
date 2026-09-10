@@ -43,29 +43,30 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Right: playful department cluster (desktop only) */}
-          <div className="relative hidden h-80 lg:block" aria-hidden="true">
-            <span className="absolute left-6 top-2 animate-float text-4xl [animation-delay:0.6s]">✨</span>
-            <span className="absolute right-4 top-24 animate-float text-4xl [animation-delay:1.2s]">🎯</span>
-            <span className="absolute bottom-2 left-16 animate-float text-4xl">💬</span>
-            {[
-              { name: "Public Relations", cls: "left-4 top-10 -rotate-6" },
-              { name: "Treasury", cls: "right-2 top-4 rotate-3" },
-              { name: "Student Relations", cls: "left-20 top-32 rotate-2" },
-              { name: "External Relations", cls: "right-8 top-40 -rotate-3" },
-              { name: "Secretarial", cls: "left-2 bottom-6 rotate-6" },
-            ].map((d, i) => (
-              <span
-                key={d.name}
-                style={{ animationDelay: `${i * 120}ms` }}
-                className={`absolute animate-pop-in rounded-full border-[3px] border-navy bg-white px-4 py-2 text-sm font-bold text-navy shadow-hard ${d.cls}`}
-              >
-                {d.name}
+          {/* Right: tidy department "sticker board" of all 8 (desktop only) */}
+          <div className="relative hidden lg:block" aria-hidden="true">
+            <span className="absolute -left-3 -top-5 animate-float text-3xl [animation-delay:0.6s]">✨</span>
+            <span className="absolute -right-2 top-8 animate-float text-3xl [animation-delay:1.2s]">🎯</span>
+
+            <div className="flex flex-wrap justify-center gap-2.5 px-2">
+              {departments.map((d, i) => (
+                <span
+                  key={d.slug}
+                  style={{ animationDelay: `${i * 70}ms` }}
+                  className={`animate-pop-in rounded-full border-[3px] border-navy bg-white px-4 py-2 text-sm font-bold text-navy shadow-hard ${
+                    i % 2 ? "rotate-2" : "-rotate-2"
+                  }`}
+                >
+                  {d.name}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <span className="rotate-1 rounded-2xl border-[3px] border-navy bg-sky px-5 py-2.5 text-base font-bold text-navy shadow-hard">
+                🏆 We'll pick your top 2
               </span>
-            ))}
-            <span className="absolute right-6 bottom-2 -rotate-3 rounded-2xl border-[3px] border-navy bg-sky px-4 py-2 text-sm font-bold text-navy shadow-hard">
-              🏆 your top 2
-            </span>
+            </div>
           </div>
         </div>
       </section>
