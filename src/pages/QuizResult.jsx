@@ -93,34 +93,41 @@ export default function QuizResult() {
         </p>
       </header>
 
-      {/* Top 2 matches */}
-      <div className="grid gap-4">
-        <ResultCard rank={1} department={dept1} score={result.top2[0].score} />
-        <ResultCard rank={2} department={dept2} score={result.top2[1].score} />
-      </div>
-
-      {/* Share card */}
-      <section className="flex flex-col items-center gap-4">
-        <ShareCardPreview ref={shareRef} dept1={dept1} dept2={dept2} />
-        <div className="flex flex-col items-center gap-1">
-          <button
-            type="button"
-            onClick={handleShare}
-            className="btn-primary"
-            disabled={shareState === "working"}
-          >
-            {shareState === "working" ? "Preparing…" : "Share my result 📸"}
-          </button>
-          {shareState === "error" ? (
-            <p className="rounded-xl border-2 border-navy bg-white px-3 py-2 text-sm font-bold text-blue-dark">
-              Couldn't generate the image — try again.
-            </p>
-          ) : null}
+      {/* Body: single column on mobile, matches | share+email on desktop */}
+      <div className="lg:grid lg:grid-cols-[1fr_380px] lg:items-start lg:gap-8">
+        {/* Left: the two matches */}
+        <div className="grid gap-4">
+          <ResultCard rank={1} department={dept1} score={result.top2[0].score} />
+          <ResultCard rank={2} department={dept2} score={result.top2[1].score} />
         </div>
-      </section>
 
-      {/* Email capture (post-reveal) */}
-      <EmailCaptureForm onSubmit={handleEmailSubmit} />
+        {/* Right: share card + email (sticky on desktop) */}
+        <div className="mt-8 flex flex-col items-center gap-6 lg:mt-0 lg:sticky lg:top-28">
+          <section className="flex flex-col items-center gap-4">
+            <ShareCardPreview ref={shareRef} dept1={dept1} dept2={dept2} />
+            <div className="flex flex-col items-center gap-1">
+              <button
+                type="button"
+                onClick={handleShare}
+                className="btn-primary"
+                disabled={shareState === "working"}
+              >
+                {shareState === "working" ? "Preparing…" : "Share my result 📸"}
+              </button>
+              {shareState === "error" ? (
+                <p className="rounded-xl border-2 border-navy bg-white px-3 py-2 text-sm font-bold text-blue-dark">
+                  Couldn't generate the image — try again.
+                </p>
+              ) : null}
+            </div>
+          </section>
+
+          {/* Email capture (post-reveal) */}
+          <div className="w-full max-w-sm">
+            <EmailCaptureForm onSubmit={handleEmailSubmit} />
+          </div>
+        </div>
+      </div>
 
       {/* Secondary actions */}
       <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">

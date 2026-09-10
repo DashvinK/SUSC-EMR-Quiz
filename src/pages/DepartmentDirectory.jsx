@@ -25,7 +25,7 @@ export default function DepartmentDirectory() {
         </p>
       </header>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {departments.map((department, i) => (
           <DepartmentCard
             key={department.slug}

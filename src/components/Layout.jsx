@@ -21,7 +21,7 @@ export default function Layout() {
   return (
     <div className="clip-x flex min-h-dvh flex-col">
       <header className="safe-top sticky top-0 z-20 border-b-[3px] border-navy bg-sky/95 backdrop-blur">
-        <div className="safe-x mx-auto flex w-full max-w-3xl items-center justify-between py-3">
+        <div className="safe-x mx-auto flex w-full max-w-6xl items-center justify-between py-3">
           <Link
             to="/"
             className="transition-transform duration-200 hover:-rotate-3 active:scale-95"
@@ -40,15 +40,16 @@ export default function Layout() {
         </div>
       </header>
 
-      {/* Keyed on the path so each navigation replays the entrance animation. */}
-      <main className="safe-x mx-auto w-full max-w-3xl flex-1 py-8">
+      {/* Keyed on the path so each navigation replays the entrance animation.
+          Pages set their own inner max-width; the shell just provides the frame. */}
+      <main className="safe-x mx-auto w-full max-w-6xl flex-1 py-8 lg:py-12">
         <div key={pathname} className="animate-page-in">
           <Outlet />
         </div>
       </main>
 
       <footer className="border-t-[3px] border-navy bg-white">
-        <div className="safe-x mx-auto w-full max-w-3xl py-6 text-center text-sm font-semibold text-navy/60">
+        <div className="safe-x mx-auto w-full max-w-6xl py-6 text-center text-sm font-semibold text-navy/60">
           <p>✨ Sunway University Student Council — Executive Member Recruitment</p>
         </div>
       </footer>

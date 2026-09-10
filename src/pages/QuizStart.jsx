@@ -30,7 +30,7 @@ export default function QuizStart() {
   }
 
   return (
-    <div>
+    <div className="mx-auto max-w-3xl">
       <div className="mb-10 text-center">
         <span className="sticker rotate-2">Step 1</span>
         <h1 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">

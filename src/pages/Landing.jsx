@@ -6,48 +6,67 @@ const PILL_TILTS = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2"];
 export default function Landing() {
   return (
     <div className="flex flex-col gap-12">
-      {/* Hero */}
+      {/* Hero — centered on mobile, two-column on desktop */}
       <section
-        className="relative overflow-hidden rounded-chunk border-[3px] border-navy bg-blue px-6 py-14 text-center text-white shadow-hard-lg sm:px-10"
+        className="relative overflow-hidden rounded-chunk border-[3px] border-navy bg-blue px-6 py-14 text-white shadow-hard-lg sm:px-10 lg:px-14 lg:py-20"
         style={{
           backgroundImage:
             "radial-gradient(120% 90% at 85% 0%, #1A6E96 0%, #115C80 55%, #0E4A68 100%)",
         }}
       >
-        {/* floating sticker decorations */}
-        <span className="pointer-events-none absolute left-5 top-6 hidden animate-float text-3xl sm:block">
-          🎯
-        </span>
-        <span className="pointer-events-none absolute right-6 top-10 hidden animate-float text-3xl [animation-delay:1.2s] sm:block">
-          ✨
-        </span>
-        <span className="pointer-events-none absolute bottom-6 right-10 hidden animate-float text-3xl [animation-delay:0.6s] sm:block">
-          💬
-        </span>
+        <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-10">
+          {/* Left: copy */}
+          <div className="text-center lg:text-left">
+            <span className="sticker animate-bounce-in -rotate-2 bg-white text-navy">
+              SUSC · EMR
+            </span>
+            <h1 className="mt-4 text-3xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
+              Which SUSC department suits you?
+            </h1>
+            <p className="mx-auto mt-4 max-w-md text-base font-medium text-white/90 lg:mx-0 lg:text-lg">
+              Answer a few honest questions and we'll match you to your top 2 of
+              eight departments. Takes about two minutes. 🕑
+            </p>
+            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
+              <Link
+                to="/quiz"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-navy bg-white px-7 py-3.5 text-lg font-bold text-navy shadow-hard transition-all duration-200 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-1 active:translate-y-1 active:shadow-none"
+              >
+                Take the quiz →
+              </Link>
+              <Link
+                to="/departments"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-white/70 px-7 py-3.5 text-lg font-bold text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
+              >
+                Browse departments
+              </Link>
+            </div>
+          </div>
 
-        <span className="sticker animate-bounce-in -rotate-2 bg-white text-navy">
-          SUSC · EMR
-        </span>
-        <h1 className="mt-4 text-3xl font-bold leading-[1.08] sm:text-5xl">
-          Which SUSC department suits you?
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-base font-medium text-white/90">
-          Answer a few honest questions and we'll match you to your top 2 of
-          eight departments. Takes about two minutes. 🕑
-        </p>
-        <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <Link
-            to="/quiz"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-navy bg-white px-7 py-3.5 text-lg font-bold text-navy shadow-hard transition-all duration-200 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-1 active:translate-y-1 active:shadow-none"
-          >
-            Take the quiz →
-          </Link>
-          <Link
-            to="/departments"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-white/70 px-7 py-3.5 text-lg font-bold text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
-          >
-            Browse departments
-          </Link>
+          {/* Right: playful department cluster (desktop only) */}
+          <div className="relative hidden h-80 lg:block" aria-hidden="true">
+            <span className="absolute left-6 top-2 animate-float text-4xl [animation-delay:0.6s]">✨</span>
+            <span className="absolute right-4 top-24 animate-float text-4xl [animation-delay:1.2s]">🎯</span>
+            <span className="absolute bottom-2 left-16 animate-float text-4xl">💬</span>
+            {[
+              { name: "Public Relations", cls: "left-4 top-10 -rotate-6" },
+              { name: "Treasury", cls: "right-2 top-4 rotate-3" },
+              { name: "Student Relations", cls: "left-20 top-32 rotate-2" },
+              { name: "External Relations", cls: "right-8 top-40 -rotate-3" },
+              { name: "Secretarial", cls: "left-2 bottom-6 rotate-6" },
+            ].map((d, i) => (
+              <span
+                key={d.name}
+                style={{ animationDelay: `${i * 120}ms` }}
+                className={`absolute animate-pop-in rounded-full border-[3px] border-navy bg-white px-4 py-2 text-sm font-bold text-navy shadow-hard ${d.cls}`}
+              >
+                {d.name}
+              </span>
+            ))}
+            <span className="absolute right-6 bottom-2 -rotate-3 rounded-2xl border-[3px] border-navy bg-sky px-4 py-2 text-sm font-bold text-navy shadow-hard">
+              🏆 your top 2
+            </span>
+          </div>
         </div>
       </section>
 
