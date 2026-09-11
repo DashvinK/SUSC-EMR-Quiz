@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { departments, getDepartment } from "../data/departments.js";
+import { applyLinkFor } from "../config.js";
 
 export default function DepartmentPage() {
   const { slug } = useParams();
@@ -15,6 +16,7 @@ export default function DepartmentPage() {
 
   const index = departments.findIndex((d) => d.slug === slug);
   const next = departments[(index + 1) % departments.length];
+  const applyHref = applyLinkFor(department);
 
   return (
     <article className="flex flex-col gap-8">
@@ -56,9 +58,9 @@ export default function DepartmentPage() {
               {department.closing || "Take the next step or see if it's your match."}
             </p>
             <div className="mt-4 flex flex-col gap-3">
-              {department.applyLink ? (
+              {applyHref ? (
                 <a
-                  href={department.applyLink}
+                  href={applyHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary w-full"

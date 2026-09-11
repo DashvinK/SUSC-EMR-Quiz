@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { applyLinkFor } from "../config.js";
 
 /**
  * On-page display of a single matched department in the result view.
@@ -13,6 +14,7 @@ import { Link } from "react-router-dom";
  */
 export default function ResultCard({ rank, department }) {
   const isTop = rank === 1;
+  const applyHref = applyLinkFor(department);
   return (
     <article
       style={{ animationDelay: `${(rank - 1) * 140}ms` }}
@@ -54,9 +56,9 @@ export default function ResultCard({ rank, department }) {
         <Link to={`/departments/${department.slug}`} className="btn-secondary">
           See department
         </Link>
-        {department.applyLink ? (
+        {applyHref ? (
           <a
-            href={department.applyLink}
+            href={applyHref}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"

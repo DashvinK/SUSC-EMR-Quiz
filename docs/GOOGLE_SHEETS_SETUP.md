@@ -58,13 +58,13 @@ The JSON looks like:
 ## 5. Create the Sheet and share it with the service account
 
 1. Create a new sheet at <https://sheets.new>. Name it (e.g. "EMR Quiz Submissions").
-2. In **row 1**, paste this header row (one value per column, A–I):
+2. In **row 1**, paste this header row (one value per column, A–H):
 
-   | A | B | C | D | E | F | G | H | I |
-   |---|---|---|---|---|---|---|---|---|
-   | timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | email | email_opt_in |
+   | A | B | C | D | E | F | G | H |
+   |---|---|---|---|---|---|---|---|
+   | timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | student_id |
 
-   > Tip: paste `timestamp	qr_source	quiz_length	dept_1	dept_2	score_breakdown	name	email	email_opt_in`
+   > Tip: paste `timestamp	qr_source	quiz_length	dept_1	dept_2	score_breakdown	name	student_id`
    > (tab-separated) into cell A1 and it fills across.
 3. Click **Share** (top-right).
 4. In the people field, paste the service account's `client_email` from the JSON, set it to

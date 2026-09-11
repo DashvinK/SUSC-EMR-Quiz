@@ -7,11 +7,11 @@ import { submitResult } from "../lib/submit.js";
 import { shareCard } from "../lib/shareCard.js";
 import ResultCard from "../components/ResultCard.jsx";
 import ShareCardPreview from "../components/ShareCardPreview.jsx";
-import EmailCaptureForm from "../components/EmailCaptureForm.jsx";
+import { EMR_FORM_URL, applyLinkFor } from "../config.js";
 
 export default function QuizResult() {
   const navigate = useNavigate();
-  const { result, resetQuiz } = useQuiz();
+  const { result, participant, resetQuiz } = useQuiz();
 
   const shareRef = useRef(null);
   const submittedRef = useRef(false); // guard against StrictMode double-fire
@@ -37,29 +37,16 @@ export default function QuizResult() {
       dept1: result.top2[0].slug,
       dept2: result.top2[1].slug,
       scoreBreakdown: result.scores,
-      name: "",
-      email: "",
-      emailOptIn: false,
+      name: participant.name,
+      studentId: participant.studentId,
     });
     // Best-effort; submitResult never throws and never surfaces errors (§9.3).
-  }, [result]);
+  }, [result, participant]);
 
   if (!result || !dept1 || !dept2) return null;
 
-  // §9.4: email opt-in after reveal → a second lightweight call carrying the
-  // same result context plus the contact details (append-only Sheet).
-  async function handleEmailSubmit({ name, email, emailOptIn }) {
-    await submitResult({
-      qrSource: getQrSource(),
-      quizLength: result.quizLength,
-      dept1: result.top2[0].slug,
-      dept2: result.top2[1].slug,
-      scoreBreakdown: result.scores,
-      name,
-      email,
-      emailOptIn,
-    });
-  }
+  // Apply link: prefer the top match's own link, else the central EMR form.
+  const applyHref = applyLinkFor(dept1) || EMR_FORM_URL;
 
   async function handleShare() {
     if (!shareRef.current) return;
@@ -122,9 +109,31 @@ export default function QuizResult() {
             </div>
           </section>
 
-          {/* Email capture (post-reveal) */}
+          {/* Apply CTA (post-reveal) */}
           <div className="w-full max-w-sm">
-            <EmailCaptureForm onSubmit={handleEmailSubmit} />
+            <div className="card bg-sky p-6 text-center">
+              <p className="text-4xl">🚀</p>
+              <h3 className="mt-2 text-xl font-bold text-navy">
+                Feeling {dept1.name}? Apply now!
+              </h3>
+              <p className="mt-1 text-sm font-medium text-navy/70">
+                SUSC EMR is open. Take your shot — it only takes a few minutes.
+              </p>
+              {applyHref ? (
+                <a
+                  href={applyHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary mt-4 w-full"
+                >
+                  Apply to SUSC →
+                </a>
+              ) : (
+                <span className="btn-primary pointer-events-none mt-4 w-full opacity-60">
+                  Applications opening soon
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>

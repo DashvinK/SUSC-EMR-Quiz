@@ -4,7 +4,7 @@ import { google } from "googleapis";
 // Appends one row per submission to a Google Sheet via the Sheets API.
 //
 // Sheet header row (set manually, see §2):
-//   timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | email | email_opt_in
+//   timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | student_id
 //
 // Required env vars (Vercel project settings — never commit):
 //   GOOGLE_SERVICE_ACCOUNT_EMAIL
@@ -70,8 +70,7 @@ export default async function handler(req, res) {
     dept2 = "",
     scoreBreakdown = {},
     name = "",
-    email = "",
-    emailOptIn = false,
+    studentId = "",
   } = body;
 
   const row = [
@@ -82,8 +81,7 @@ export default async function handler(req, res) {
     dept2,
     JSON.stringify(scoreBreakdown),
     name,
-    email,
-    emailOptIn ? "TRUE" : "FALSE",
+    studentId,
   ];
 
   const tab = process.env.GOOGLE_SHEET_TAB || "Sheet1";
@@ -92,7 +90,7 @@ export default async function handler(req, res) {
     const sheets = getSheetsClient();
     await sheets.spreadsheets.values.append({
       spreadsheetId: normalizeSheetId(process.env.GOOGLE_SHEET_ID),
-      range: `${tab}!A:I`,
+      range: `${tab}!A:H`,
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       requestBody: { values: [row] },

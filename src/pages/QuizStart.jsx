@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuiz } from "../context/QuizContext.jsx";
 import { QUIZ_LENGTHS } from "../data/questions.js";
@@ -20,28 +21,101 @@ const OPTIONS = [
   },
 ];
 
+const INPUT_CLASS =
+  "rounded-2xl border-[3px] border-navy bg-white px-4 py-3 text-base font-medium text-navy shadow-hard-sm transition-all duration-200 placeholder:text-navy/40 focus:-translate-y-0.5 focus:shadow-hard focus:outline-none";
+
 export default function QuizStart() {
   const navigate = useNavigate();
-  const { startQuiz } = useQuiz();
+  const { participant, setParticipant, startQuiz } = useQuiz();
+
+  const [name, setName] = useState(participant.name || "");
+  const [studentId, setStudentId] = useState(participant.studentId || "");
+  const [error, setError] = useState("");
+  const formRef = useRef(null);
 
   function choose(length) {
+    const cleanName = name.trim();
+    const cleanId = studentId.trim();
+
+    if (!cleanName) {
+      setError("Pop your name in first, then pick a length 👇");
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (!/^\d{8}$/.test(cleanId)) {
+      setError("Your student ID should be exactly 8 digits.");
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    setParticipant({ name: cleanName, studentId: cleanId });
     startQuiz(length);
     navigate("/quiz/play");
   }
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="mb-10 text-center">
+      <div className="mb-8 text-center">
         <span className="sticker rotate-2">Step 1</span>
         <h1 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
-          Pick your quiz length 📏
+          First, the basics 📝
         </h1>
         <p className="mx-auto mt-2 max-w-md font-medium text-navy/70">
-          Both match you to your top 2 departments. Longer just means a sharper
-          result.
+          Tell us who you are, then pick your quiz length. Both match you to your
+          top 2 departments.
         </p>
       </div>
 
+      {/* Identity form */}
+      <div ref={formRef} className="card mb-6 p-6">
+        <h2 className="text-lg font-bold text-navy">Who's taking the quiz?</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-bold text-navy/80">Full name</span>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                if (error) setError("");
+              }}
+              autoComplete="name"
+              placeholder="e.g. Dashvin Kumar"
+              className={INPUT_CLASS}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-bold text-navy/80">Student ID</span>
+            <input
+              type="text"
+              value={studentId}
+              onChange={(e) => {
+                // digits only, max 8
+                setStudentId(e.target.value.replace(/\D/g, "").slice(0, 8));
+                if (error) setError("");
+              }}
+              inputMode="numeric"
+              autoComplete="off"
+              maxLength={8}
+              placeholder="e.g. 23012345"
+              className={INPUT_CLASS}
+            />
+          </label>
+        </div>
+        {error ? (
+          <p
+            className="mt-3 rounded-xl border-2 border-navy bg-white px-3 py-2 text-sm font-bold text-blue-dark"
+            role="alert"
+          >
+            {error}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Quiz length */}
+      <h2 className="mb-4 text-center text-lg font-bold text-navy">
+        Now pick your quiz length 📏
+      </h2>
       <div className="grid gap-5 sm:grid-cols-2">
         {OPTIONS.map((opt, i) => (
           <button

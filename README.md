@@ -51,7 +51,7 @@ Set the same three variables in **Vercel → Project → Settings → Environmen
 The destination Sheet's header row should be:
 
 ```
-timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | email | email_opt_in
+timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | student_id
 ```
 
 ## QR source tracking

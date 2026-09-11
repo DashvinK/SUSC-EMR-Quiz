@@ -14,6 +14,7 @@ export function QuizProvider({ children }) {
   const [quizLength, setQuizLength] = useState(null); // "quick" | "thorough"
   const [answers, setAnswers] = useState({}); // { [questionId]: optionIndex }
   const [result, setResult] = useState(null); // { top2, scores, quizLength }
+  const [participant, setParticipant] = useState({ name: "", studentId: "" });
 
   // Capture QR source on first load (§10).
   useEffect(() => {
@@ -57,12 +58,14 @@ export function QuizProvider({ children }) {
       questions,
       answers,
       result,
+      participant,
+      setParticipant,
       startQuiz,
       answerQuestion,
       finishQuiz,
       resetQuiz,
     }),
-    [quizLength, questions, answers, result]
+    [quizLength, questions, answers, result, participant]
   );
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;

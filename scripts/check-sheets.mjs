@@ -89,5 +89,5 @@ if (!tabs.includes(tab)) {
 console.log(
   `\n✅ All good — submissions will append to the "${tab}" tab.\n` +
     "   Make sure its header row is:\n" +
-    "   timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | email | email_opt_in"
+    "   timestamp | qr_source | quiz_length | dept_1 | dept_2 | score_breakdown | name | student_id"
 );
